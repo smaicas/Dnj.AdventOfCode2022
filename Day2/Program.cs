@@ -8,7 +8,7 @@ Console.WriteLine("Advent of Code 2022 - Day 2");
 Console.WriteLine(Environment.NewLine);
 
 // PART 1
-List<string> list = ReadFileLinesWithReplace("input.txt").ToList();
+IEnumerable<string> list = ReadFileLinesWithReplace("input.txt");
 
 int total = 0;
 foreach (string game in list)
