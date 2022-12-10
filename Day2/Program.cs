@@ -1,14 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-// ReSharper disable ComplexConditionExpression
+﻿// ReSharper disable ComplexConditionExpression
 
 //A - Piedra
 //B - Papel
 //C - Tijera
 
 Console.WriteLine("Advent of Code 2022 - Day 2");
+Console.WriteLine(Environment.NewLine);
 
 // PART 1
-
 List<string> list = ReadFileLinesWithReplace("input.txt").ToList();
 
 int total = 0;
