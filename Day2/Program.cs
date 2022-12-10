@@ -1,131 +1,30 @@
 ﻿// ReSharper disable ComplexConditionExpression
 
-//A - Piedra
-//B - Papel
-//C - Tijera
-
+// Solution
+using Day2;
 Console.WriteLine("Advent of Code 2022 - Day 2");
 Console.WriteLine(Environment.NewLine);
+Solution resolver = new();
+Console.WriteLine($"Total Part 1: {resolver.ResolvePart1()}");
+Console.WriteLine($"Total Part 2: {resolver.ResolvePart2()}");
+Console.ReadKey();
 
-// PART 1
-IEnumerable<string> list = ReadFileLinesWithReplace("input.txt");
+// Benchmark
+//using BenchmarkDotNet.Running;
+//using Day2;
+//BenchmarkDotNet.Reports.Summary summary = BenchmarkRunner.Run<Solution>();
+//Console.ForegroundColor = ConsoleColor.DarkCyan;
+//Console.WriteLine("Benchmark ended!. Press any key to close");
+//Console.ResetColor();
+//Console.ReadKey();
 
-int total = 0;
-foreach (string game in list)
-{
-    string[] split = game.Split(' ');
+//BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22000.1219/21H2)
+//AMD Ryzen 9 3900X, 1 CPU, 24 logical and 12 physical cores
+//    .NET SDK=7.0.100
+//    [Host]     : .NET 7.0.0 (7.0.22.51805), X64 RyuJIT AVX2
+//DefaultJob : .NET 7.0.0 (7.0.22.51805), X64 RyuJIT AVX2
 
-    total = split[1] switch
-    {
-        "A" => total + 1,
-        "B" => total + 2,
-        "C" => total + 3,
-        _ => throw new ArgumentException("Bad parameters")
-    };
-
-    RockPaperScissorsComparer comparer = new();
-
-    total = comparer.Compare(split[0], split[1]) switch
-    {
-        0 => total + 3,
-        1 => total + 0,
-        -1 => total + 6,
-        _ => throw new ArgumentException("Bad parameters")
-    };
-
-}
-
-Console.WriteLine($"Total Part 1: {total}");
-
-// PART 2:
-list = ReadFileLinesReplaceNumber("input.txt").ToList();
-int total2 = 0;
-
-foreach (string s in list)
-{
-    string[] split = s.Split(" ");
-    int res = int.Parse(split[1]);
-    total2 += res;
-
-    switch (res)
-    {
-        case 0:
-            total2 += split[0] switch
-            {
-                "A" => 3,
-                "B" => 1,
-                "C" => 2,
-                _ => throw new ArgumentException("Bad parameters")
-            };
-            break;
-        case 3:
-            total2 += split[0] switch
-            {
-                "A" => 1,
-                "B" => 2,
-                "C" => 3,
-                _ => throw new ArgumentException("Bad parameters")
-            };
-            break;
-        case 6:
-            total2 += split[0] switch
-            {
-                "A" => 2,
-                "B" => 3,
-                "C" => 1,
-                _ => throw new ArgumentException("Bad parameters")
-            };
-            break;
-    }
-}
-Console.WriteLine($"Total Part 2: {total2}");
-
-static IEnumerable<string> ReadFileLinesWithReplace(string filePath)
-{
-    using StreamReader reader = new(filePath);
-
-    while (reader.ReadLine() is { } line)
-    {
-        yield return line.Replace('X', 'A').Replace('Y', 'B').Replace('Z', 'C');
-    }
-}
-static IEnumerable<string> ReadFileLinesReplaceNumber(string filePath)
-{
-    using StreamReader reader = new(filePath);
-
-    while (reader.ReadLine() is { } line)
-    {
-        yield return line.Replace('X', '0').Replace('Y', '3').Replace('Z', '6');
-    }
-}
-
-public class RockPaperScissorsComparer : IComparer<string>
-{
-    /// <exception cref="ArgumentException">Bad parameters</exception>
-    public int Compare(string? x, string? y)
-    {
-        if (x == null || y == null) throw new ArgumentException("Somebody did not choose");
-
-        if (x.Equals(y)) return 0;
-
-        switch (x)
-        {
-            case "A" when y.Equals("B"):
-                return -1;
-            case "A" when y.Equals("C"):
-
-            case "B" when y.Equals("A"):
-                return 1;
-            case "B" when y.Equals("C"):
-                return -1;
-
-            case "C" when y.Equals("B"):
-                return 1;
-            case "C" when y.Equals("A"):
-                return -1;
-
-            default:
-                throw new ArgumentException("Bad parameters");
-        }
-    }
-}
+//    |       Method |     Mean |   Error |  StdDev | Rank |    Gen0 |   Gen1 | Allocated |
+//    |------------- |---------:|--------:|--------:|-----:|--------:|-------:|----------:|
+//    | ResolvePart1 | 303.7 us | 5.80 us | 5.14 us |    1 | 53.2227 | 1.4648 | 437.48 KB |
+//    | ResolvePart2 | 324.0 us | 4.08 us | 3.61 us |    2 | 45.8984 | 0.9766 | 378.89 KB |
