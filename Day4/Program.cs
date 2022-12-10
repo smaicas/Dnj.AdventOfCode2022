@@ -1,7 +1,7 @@
 ﻿// Solution
 
-using Day3;
-Console.WriteLine("Advent of Code 2022 - Day 3");
+using Day4;
+Console.WriteLine("Advent of Code 2022 - Day 4");
 Console.WriteLine(Environment.NewLine);
 Solution resolver = new();
 Console.WriteLine($"Part 1: {resolver.ResolvePart1()}");
@@ -9,9 +9,8 @@ Console.WriteLine($"Part 2: {resolver.ResolvePart2()}");
 Console.ReadKey();
 
 // Benchmark
-
 //using BenchmarkDotNet.Running;
-//using Day3;
+//using Day4;
 //BenchmarkDotNet.Reports.Summary summary = BenchmarkRunner.Run<Solution>();
 //Console.ForegroundColor = ConsoleColor.DarkCyan;
 //Console.WriteLine("Benchmark ended!. Press any key to close");
@@ -24,7 +23,7 @@ Console.ReadKey();
 //    [Host]     : .NET 7.0.0 (7.0.22.51805), X64 RyuJIT AVX2
 //DefaultJob : .NET 7.0.0 (7.0.22.51805), X64 RyuJIT AVX2
 
-//    |       Method |       Mean |    Error |   StdDev | Rank |     Gen0 |    Gen1 | Allocated |
-//    |------------- |-----------:|---------:|---------:|-----:|---------:|--------:|----------:|
-//    | ResolvePart1 |   925.5 us | 11.74 us |  9.16 us |    1 | 125.0000 | 14.6484 |      1 MB |
-//    | ResolvePart2 | 1,055.5 us | 14.70 us | 20.13 us |    2 | 136.7188 | 17.5781 |    1.1 MB |
+//    |       Method |     Mean |   Error |   StdDev |   Median | Rank |    Gen0 |   Gen1 | Allocated |
+//    |------------- |---------:|--------:|---------:|---------:|-----:|--------:|-------:|----------:|
+//    | ResolvePart2 | 358.7 us | 7.65 us | 22.43 us | 349.1 us |    1 | 67.8711 | 1.9531 | 554.57 KB |
+//    | ResolvePart1 | 436.3 us | 8.56 us |  8.80 us | 432.2 us |    2 | 86.9141 | 2.4414 |  711.8 KB |
